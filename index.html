@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>App Grid</title>
+<body style="margin:0;background:#f8fafc;color:#0f172a;font:16px/1.4 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;">
+
+<div style="height:100vh;display:flex;flex-direction:column;">
+  <!-- Sticky search bar -->
+  <div style="position:sticky;top:0;background:#f8fafc;padding:10px;border-bottom:1px solid #ccc;z-index:10;">
+    <div style="display:flex;gap:8px;">
+      <input id="q" type="search" placeholder="Search apps..." autocomplete="off"
+             style="flex:1;padding:8px;border:1px solid #ccc;border-radius:4px;">
+      <button type="button" id="clearBtn"
+              style="padding:8px;border:1px solid #ccc;border-radius:4px;cursor:pointer;">
+        Clear
+      </button>
+    </div>
+    <div id="count" style="font-size:12px;color:#666;margin-top:4px;">0 apps</div>
+  </div>
+
+  <!-- Scrollable grid -->
+  <div style="flex:1;overflow:auto;padding:10px;">
+    <div id="grid" style="display:grid;grid-template-columns:repeat(2,180px);justify-content:center;gap:0;margin:0;padding:0;">
+
+      <!-- ===== 64 blocks (edit href/src/data-name as needed) ===== -->
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 1"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 1" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 2"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 2" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 3"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 3" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 4"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 4" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 5"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 5" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 6"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 6" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 7"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 7" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 8"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 8" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 9"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 9" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 10"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 10" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 11"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 11" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 12"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 12" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 13"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 13" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 14"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 14" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 15"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 15" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 16"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 16" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 17"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 17" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 18"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 18" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 19"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 19" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 20"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 20" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 21"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 21" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 22"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 22" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 23"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 23" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 24"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 24" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 25"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 25" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 26"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 26" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 27"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 27" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 28"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 28" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 29"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 29" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 30"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 30" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 31"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 31" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 32"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 32" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 33"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 33" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 34"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 34" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 35"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 35" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 36"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 36" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 37"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 37" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 38"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 38" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 39"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 39" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 40"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 40" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 41"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 41" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 42"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 42" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 43"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 43" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 44"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 44" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 45"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 45" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 46"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 46" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 47"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 47" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 48"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 48" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 49"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 49" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 50"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 50" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 51"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 51" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 52"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 52" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 53"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 53" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 54"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 54" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 55"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 55" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 56"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 56" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 57"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 57" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 58"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 58" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 59"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 59" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 60"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 60" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 61"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 61" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 62"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 62" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 63"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 63" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="CHANGEME" data-name="App 64"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="App 64" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <!-- ===== end 64 ===== -->
+
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var grid = document.getElementById('grid');
+  var q = document.getElementById('q');
+  var clearBtn = document.getElementById('clearBtn');
+  var countEl = document.getElementById('count');
+
+  function norm(s){ return (s||'').toLowerCase().trim(); }
+
+  function applyQuery(raw){
+    var term = norm(raw);
+    var blocks = Array.prototype.slice.call(grid.children);
+    var matches = [], nonMatches = [];
+
+    for (var i=0; i<blocks.length; i++){
+      var a = blocks[i].querySelector('a[data-name]');
+      var hay = norm((a.getAttribute('data-name')||'') + ' ' + (a.getAttribute('data-tags')||''));
+      if (!term || hay.indexOf(term) !== -1) {
+        matches.push(blocks[i]);
+      } else {
+        nonMatches.push(blocks[i]);
+      }
+    }
+
+    // Rebuild: matches first (visible), then non-matches hidden
+    var frag = document.createDocumentFragment();
+    matches.forEach(function(b){ b.style.display='block'; frag.appendChild(b); });
+    nonMatches.forEach(function(b){ b.style.display='none'; frag.appendChild(b); });
+    grid.innerHTML = '';
+    grid.appendChild(frag);
+
+    countEl.textContent = matches.length + ' app' + (matches.length===1?'':'s');
+  }
+
+  q.addEventListener('input', function(){ applyQuery(q.value); });
+  clearBtn.addEventListener('click', function(){
+    q.value = '';
+    q.focus();
+    applyQuery('');
+  });
+
+  // Initial render
+  applyQuery('');
+})();
+</script>
+
+</body>
+</html>
