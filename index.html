@@ -19,8 +19,33 @@
     <div id="count" style="font-size:12px;color:#666;margin-top:4px;">0 apps</div>
   </div>
 
+  <!-- === disable horizontal gestures/overflow inside the iframe === -->
+<style>
+  /* Global: no horizontal overflow, vertical scroll + pinch only */
+  html, body {
+    overflow-x: hidden;
+    touch-action: pan-y pinch-zoom;
+  }
+
+  /* The scrollable area around your grid */
+  #scroller {
+    overflow-y: auto;
+    overflow-x: hidden;                 /* kill sideways scrollbars */
+    touch-action: pan-y;                /* ignore horizontal swipes */
+    -ms-touch-action: pan-y;
+    -webkit-overflow-scrolling: touch;  /* smooth iOS scrolling */
+    overscroll-behavior-x: none;        /* no horizontal rubberband */
+  }
+
+  /* Optional niceties */
+  #scroller img {
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+</style>
+
   <!-- Scrollable grid -->
-  <div style="flex:1;overflow:auto;padding:10px;">
+  <div id="scroller" style="flex:1;overflow:auto;padding:10px;">
     <div id="grid" style="display:grid;grid-template-columns:repeat(2,180px);justify-content:center;gap:0;margin:0;padding:0;">
 
       <!-- ===== 64 blocks (edit href/src/data-name as needed) ===== -->
@@ -127,6 +152,7 @@
 
 <script>
 (function(){
+  // ===== your existing search/filter code =====
   var grid = document.getElementById('grid');
   var q = document.getElementById('q');
   var clearBtn = document.getElementById('clearBtn');
@@ -168,6 +194,42 @@
 
   // Initial render
   applyQuery('');
+
+  // ===== vertical-only behavior inside iframe =====
+  // Expecting your scrollable wrapper to have id="scroller"
+  // (change the query below if you named it differently)
+  var scroller = document.getElementById('scroller');
+
+  if (scroller) {
+    // Make sure styles are set even if CSS couldn't be added separately
+    try {
+      scroller.style.overflowY = 'auto';
+      scroller.style.overflowX = 'hidden';
+      scroller.style.webkitOverflowScrolling = 'touch';
+      // These help mobile browsers prefer vertical panning
+      scroller.style.touchAction = 'pan-y';
+      scroller.style.msTouchAction = 'pan-y';
+    } catch (e) {}
+
+    // Block horizontal wheel/trackpad scroll; let vertical through
+    scroller.addEventListener('wheel', function(e){
+      // If the gesture is primarily horizontal, cancel it
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+        e.preventDefault(); // listener is non-passive (see options below)
+      }
+    }, { passive: false });
+
+    // Optional: ignore left/right arrow keys inside the scroller
+    scroller.addEventListener('keydown', function(e){
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') e.preventDefault();
+    });
+
+    // Optional: prevent image drag/ghosting
+    var imgs = scroller.querySelectorAll('img');
+    for (var i = 0; i < imgs.length; i++) {
+      imgs[i].setAttribute('draggable', 'false');
+    }
+  }
 })();
 </script>
 
