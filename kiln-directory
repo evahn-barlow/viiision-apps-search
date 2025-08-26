@@ -34,6 +34,7 @@
   /* Make iframe content vertical-only; no horizontal swipe */
   html, body { overflow-x: hidden; touch-action: pan-y pinch-zoom; }
   #scroller {
+    background: #e7d4bb; /* only the grid area */
     overflow-y: auto; overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
     touch-action: pan-y; -ms-touch-action: pan-y;
