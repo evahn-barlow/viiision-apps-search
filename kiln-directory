@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>App Grid</title>
+  <style>
+  /* Filters panel */
+  #filtersPanel {
+    display: none;
+    margin-top: 8px;
+    padding: 10px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,.06);
+  }
+  #filtersHost {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid #e5e7eb;
+    border-radius: 999px;
+    padding: 6px 10px;
+    cursor: pointer;
+    user-select: none;
+    font-size: 14px;
+  }
+
+  /* Make iframe content vertical-only; no horizontal swipe */
+  html, body { overflow-x: hidden; touch-action: pan-y pinch-zoom; }
+  #scroller {
+    overflow-y: auto; overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y; -ms-touch-action: pan-y;
+  }
+</style>
+<body style="margin:0;background:#f8fafc;color:#0f172a;font:16px/1.4 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;">
+
+<div style="height:100vh;display:flex;flex-direction:column;">
+<!-- Sticky search + filters -->
+<div style="position:sticky;top:0;background:#f8fafc;padding:10px;border-bottom:1px solid #ccc;z-index:10;">
+  <div style="display:flex;gap:8px;align-items:center;">
+    <input id="q" type="search" placeholder="Search apps..." autocomplete="off"
+           style="flex:1;padding:8px;border:1px solid #ccc;border-radius:4px; font-size:16px;">
+    <button type="button" id="filterBtn"
+            style="padding:8px 10px;border:1px solid #ccc;border-radius:4px;cursor:pointer;background:#fff;">
+      Filters
+    </button>
+    <button type="button" id="clearBtn"
+            style="padding:8px 10px;border:1px solid #ccc;border-radius:4px;cursor:pointer;background:#fff;">
+      Clear
+    </button>
+  </div>
+  <div id="count" style="font-size:12px;color:#666;margin-top:4px;">0 apps</div>
+
+  <div id="filtersPanel">
+    <div id="filtersHost"></div>
+    <div style="margin-top:8px;display:flex;gap:8px;align-items:center;">
+      <button type="button" id="filtersClear"
+              style="padding:6px 10px;border:1px solid #ccc;border-radius:6px;background:#fff;cursor:pointer;">
+        Clear filters
+      </button>
+      <div id="filtersSummary" style="font-size:12px;color:#555;"></div>
+    </div>
+  </div>
+</div>
+
+  <!-- === disable horizontal gestures/overflow inside the iframe === -->
+<style>
+  /* Global: no horizontal overflow, vertical scroll + pinch only */
+  html, body {
+    overflow-x: hidden;
+    touch-action: pan-y pinch-zoom;
+  }
+
+  /* The scrollable area around your grid */
+  #scroller {
+    overflow-y: auto;
+    overflow-x: hidden;                 /* kill sideways scrollbars */
+    touch-action: pan-y;                /* ignore horizontal swipes */
+    -ms-touch-action: pan-y;
+    -webkit-overflow-scrolling: touch;  /* smooth iOS scrolling */
+    overscroll-behavior-x: none;        /* no horizontal rubberband */
+  }
+
+  /* Optional niceties */
+  #scroller img {
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+</style>
+
+  <!-- Scrollable grid -->
+  <div id="scroller" style="flex:1;overflow:auto;padding:10px;">
+    <div id="grid" style="display:grid;grid-template-columns:repeat(2,180px);justify-content:center;gap:0;margin:0;padding:0;">
+
+      <!-- ===== 64 blocks (edit href/src/data-name as needed) ===== -->
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/67db6cc10a638902a507d43f" target="_blank" data-name="1000 Springs Mill" data-tags="Business Card, Services"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/1000%20Springs%20Mill.png" alt="1000 Springs Mill" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/67d84067c378679a25af1680" target="_blank" data-name="Agripack Employee" data-tags="Services"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/Agripack%20Employee%20App.png" alt="Agripack Employee" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/685058e1817fc1e02100d169" target="_blank" data-name="Agripack Onions" data-tags="Packaged Goods"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/Agripack%20Onion%20App.png" alt="Agripack Onions" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/6851a89af34e415081518bf9" target="_blank" data-name="Agripack Potatoes" data-tags="Packaged Goods"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/Agripack%20Potato%20App.png" alt="Agripack Potatoes" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/67e4447b2572441df20d976f" target="_blank" data-name="AI Genius Consulting - Noah Riley" data-tags="Business Card, Services"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/AI%20Genius%20Automations.png" alt="AI Genius Consulting - Noah Riley" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/6835fbd000481fec710da71e" target="_blank" data-name="Akari Luxury Brand" data-tags="Packaged Goods, Demo"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/Akari%20Luxury%20Brand.png" alt="Akari Luxury Brand" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/685edd7d7a5c2dd44d568819" target="_blank" data-name="Allegro Clinics - General" data-tags="Healthcare"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/Allegro%20Clinics%20-%20General.png" alt="Allegro Clinics - General" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/6866a271a70d368853206f4b" target="_blank" data-name="Allegro Clinics - Just in Time" data-tags="Healthcare, Just in Time"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/Allegro%20Clinics%20-%20Just%20in%20Time.png" alt="Allegro Clinics - Just in Time" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/67db17f7bed0a29cae6f7e0f" target="_blank" data-name="Apex Property Management" data-tags="Business Card"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/Apex%20Property%20Management.png" alt="Apex Property Management" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/625ce37eb6f7911b2e60c584" target="_blank" data-name="BBSI Jason's Team" data-tags="BBSI"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/BBSI%20Jason's%20Team.png" alt="BBSI Jason's Team" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/625ce382f5109d44c42e26d5?feature=menu" target="_blank" data-name="BBSI Boise" data-tags="BBSI"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/BBSI%20Boise.png" alt="BBSI Boise" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/625ce46496ed6c2e1b7d8f85" target="_blank" data-name="BBSI Twin Falls" data-tags="BBSI"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/BBSI%20Twin%20Falls.png" alt="BBSI Twin Falls" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/65807f3d4d89475e971d5a46" target="_blank" data-name="Belong Company" data-tags="Packaged Goods"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/Belong%20Company.png" alt="Belong Company" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/675c6e958d0d24590305d319" target="_blank" data-name="Big Jon Fitness" data-tags="Services"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/Big%20Jon%20Fitness.png" alt="Big Jon Fitness" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/67e1c3a28c7b4b644d9f2f2d" target="_blank" data-name="Chaitra Vedullapalli" data-tags="Business Card"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/Chaitra%20Vedullapalli.png" alt="Chaitra Vedullapalli" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/681b81df76fa9939eb0a3abf" target="_blank" data-name="Charlie Winters" data-tags="Business Card"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/16.png" alt="Charlie Winters" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/5d35ccfbf72563414e372dc1" target="_blank" data-name="City of Idaho Falls" data-tags="Tourism"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/City%20of%20Idaho%20Falls.png" alt="City of Idaho Falls" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/67c9e7c632601ecd7c0cfc98" target="_blank" data-name="Dat Tran" data-tags="Business Card, Services"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/Dat%20Tran.png" alt="Dat Tran" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/689f73dfe0c418f9c5064eb3" target="_blank" data-name="Founders of the Mountain West - Innovate Boise" data-tags="Business Card, Events"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/Founders%20of%20MW%20(1).png" alt="Founders of the Mountain West" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/67ffe1a1c14fdacb2ec2b782" target="_blank" data-name="Jillian Williams - EngageTogether" data-tags="Business Card, Just in Time"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/Jillian%20Williams.png" alt="Jillian Williams - EngageTogether" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/67efeb11b3c50fd286ced32c" target="_blank" data-name="Steve Grissim - EngageTogether" data-tags="Business Card, Just in Time"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/Steve%20Grissim.png" alt="Steve Grissim - EngageTogether" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/64f105d3a7522d3099370817" target="_blank" data-name="Highland Beef" data-tags="Packaged Goods, Demo"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/Highland%20Beef.png" alt="Highland Beef" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/6151de3e483c9e5654398752" target="_blank" data-name="Historic Nauvoo" data-tags="Tourism"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/Historic%20Nauvoo.png" alt="Historic Nauvoo" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/67c8777e65d2b179a4a33648" target="_blank" data-name="HRMN" data-tags="Healthcare"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/HRMN.png" alt="HRMN" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/62119f2352358c6d916c80b2" target="_blank" data-name="IBL Events" data-tags="Events"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/IBL%20Events.png" alt="IBL Events" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/664d2565a828af3fad1f8334" target="_blank" data-name="Idaho Commerce" data-tags="Events"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/Idaho%20Commerce.png" alt="Idaho Commerce" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/5d92570bcbd5610be74a2452" target="_blank" data-name="Idaho Falls Art Museum" data-tags="Tourism"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/Idaho%20Falls%20Art%20Museum.png" alt="Idaho Falls Art Museum" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/66b27f10be1a85caf0c7ed17" target="_blank" data-name="Idaho Falls Zoo" data-tags="Tourism"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/Idaho%20Falls%20Zoo.png" alt="Idaho Falls Zoo" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/66b27f10be1a85caf0c7ed17" target="_blank" data-name="Idaho Tourism" data-tags="Tourism"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/Idaho%20Tourism.png" alt="Idaho Tourism" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/6887963a1d96a5cf986af1ae" target="_blank" data-name="Just in Time Allegro Clone" data-tags="Just in Time, Healthcare"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/Just%20in%20Time%20-%20Allegro%20Clone.png" alt="Just in Time Allegro Clone" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/648d3dabe6cd1c521517fa29" target="_blank" data-name="Just in Time Demo" data-tags="Just in Time, Demo"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/Just%20in%20Time%20Demo.png" alt="Just in Time Demo" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/635812b6eed63b098b6f37b3" target="_blank" data-name="Justice U" data-tags="Healthcare, Just in Time"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/Justice%20U.png" alt="Justice U" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/67e429d81db97f862a0e95a0" target="_blank" data-name="Lytx" data-tags="Business Card"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/Lytx.png" alt="Lytx" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/67f012439040c415659b8edb" target="_blank" data-name="Mark Radford" data-tags="Business Card"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/Mark%20Radford.png" alt="Mark Radford" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/67cb6f852ff4fac02030c4fa" target="_blank" data-name="Meridian Medical Aesthetics - MMA" data-tags="Healthcare"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/MMA.png" alt="Meridian Medical Aesthetics - MMA" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/670d4762e6cd0373040e273c" target="_blank" data-name="Mormon Trek 2025" data-tags="Tourism"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/Mormon%20Trek.png" alt="Mormon Trek 2025" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/5fab1270cbd56130fe602da2" target="_blank" data-name="Mystic River Wines" data-tags="Packaged Goods, Demo"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/Mystic%20River%20Vineyard.png" alt="Mystic River Wines" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/65cd1c0f5180fe8afc8ad9af" target="_blank" data-name="Non-GMO Project" data-tags="Services"><img src="https://storage.googleapis.com/liii/SDAssets/HVACDemo/Electrical3.png" alt="Non-GMO Project" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/6841b60ee67ffa0ae197c80e" target="_blank" data-name="OMG Media - Stephanie Cullen" data-tags="Business Card"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/OMG%20Media.png" alt="OMG Media - Stephanie Cullen" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/6602de95d19a1a653a276516" target="_blank" data-name="Opulus Beauty" data-tags="Services"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/Opulus%20Beauty.png" alt="Opulus Beauty" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/60d9e14c41725c0c3329e832" target="_blank" data-name="ProPeat" data-tags="Packaged Goods"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/ProPeat.png" alt="ProPeat" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/67e47d1f6fbd844f3f01a054" target="_blank" data-name="Rich Stuppy" data-tags="Business Card"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/Rich%20Stuppy.png" alt="Rich Stuppy" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/682cdaf0d2b9ee466105b1cc" target="_blank" data-name="Scott McLean" data-tags="Business Card"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/Scott%20Mclean.png" alt="Scott McLean" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/680bb2a20b0518b07d8f13e6" target="_blank" data-name="Dan Thompson - Secret Peak Construction" data-tags="Business Card, Services"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/Dan%20Thompson.png" alt="Dan Thompson - Secret Peak Construction" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/681e5ae82a59595866056636" target="_blank" data-name="Senso-ji Temple" data-tags="Tourism"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/Senso-ji.png" alt="Senso-ji Temple" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/5ebc2ccacbd5614ce9105d72" target="_blank" data-name="SLC Airport" data-tags="Tourism"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/SLC%20Airport.png" alt="SLC Airport" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/6324e29f35ec770a1d043273" target="_blank" data-name="Snacktivist" data-tags="Services"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/Snacktivist.png" alt="Snacktivist" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/65d7bd405ed1a440a07aa2ad" target="_blank" data-name="Spadafora" data-tags="Packaged Goods, Demo"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/Spadafora.png" alt="Spadafora" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/681ce650d126b42c500f250f" target="_blank" data-name="Sumira Bank" data-tags="Business Card"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/Sumira%20Bank.png" alt="Sumira Bank" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/66c7a4aed5296db27612f2e7" target="_blank" data-name="Sustain a Grain" data-tags="Services"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/Sustain%20a%20Grain.png" alt="Sustain a Grain" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/62a7970de582ee7a161565d4" target="_blank" data-name="Sweet Zola's Candy" data-tags="Packaged Goods"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/Sweet%20Zola's%20Candy.png" alt="Sweet Zola's Candy" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/5d890ffacbd56152c76367b5" target="_blank" data-name="The Blocks" data-tags="Tourism"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/The%20Blocks.png" alt="The Blocks" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/6753c68cd22f003c98bc527d" target="_blank" data-name="The Human Bean" data-tags="Services"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/The%20Human%20Bean.png" alt="The Human Bean" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/6582120059f83c5baf522ffc" target="_blank" data-name="This is the Place Heritage Park" data-tags="Tourism"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/TITP.png" alt="This is the Place Heritage Park" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/65d64aae27e57e78041124e6" target="_blank" data-name="Toybox Car Club" data-tags="Services"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/Toybox.png" alt="Toybox Car Club" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/67db1c8f3cd3c91fb8048196" target="_blank" data-name="Trade Winds" data-tags="Tourism"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/Trade%20Winds.png" alt="Trade Winds" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/5d3f5c98f725634e1974cb8c" target="_blank" data-name="Veteran's Entrepreneur Alliance" data-tags="Services"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/VEA.png" alt="Veteran's Entrepreneur Alliance" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/6567a3388b9f22f6d2c93e39" target="_blank" data-name="Viiision" data-tags="Services, Viiision"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/Viiision.png" alt="Viiision" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/639a3f75bdc2b80e6f58c992" target="_blank" data-name="Viiision - Charley Barlow" data-tags="Business Card, Viiision"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/Charley%20Barlow.png" alt="Viiision - Charley Barlow" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/663bd5880f24b611104fa7d5" target="_blank" data-name="Viiision - Brittany Hansen" data-tags="Business Card, Viiision"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/Brittany%20Hansen.png" alt="Viiision - Brittany Hansen" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/65a99479595508a9e0b2131f" target="_blank" data-name="Viiision - Molly Krogh" data-tags="Business Card, Viiision"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/Molly.png" alt="Viiision - Molly Krogh" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/654a729af4e9c6653a59e456" target="_blank" data-name="WIC Central District Health" data-tags="Services"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/WIC.png" alt="WIC Central District Health" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/6570d6d57996313622306176" target="_blank" data-name="Y'lan Salon and Spa" data-tags="Services"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/Ylan.png" alt="Y'lan Salon and Spa" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/657a1bdb5a38a219335fac16" target="_blank" data-name="Zacca Hummus" data-tags="Packaged Goods"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/Zacca%20Hummus.png" alt="Zacca Hummus" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <div class="col" style="width:180px;height:180px;"><a href="https://go.viiision.app/topic/65b1a1154813ad65d9dbbf27" target="_blank" data-name="Zego Foods" data-tags="Packaged Goods"><img src="https://storage.googleapis.com/liii/SDAssets/Viiision%20Builds/Zego.png" alt="Zego Foods" loading="lazy" style="width:180px;height:180px;object-fit:cover;display:block;"></a></div>
+      <!-- ===== end 64 ===== -->
+
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  // ===== DOM refs =====
+  var grid = document.getElementById('grid');
+  var q = document.getElementById('q');
+  var clearBtn = document.getElementById('clearBtn');
+  var countEl = document.getElementById('count');
+
+  // Filters UI
+  var filterBtn = document.getElementById('filterBtn');
+  var filtersPanel = document.getElementById('filtersPanel');
+  var filtersHost = document.getElementById('filtersHost');
+  var filtersClear = document.getElementById('filtersClear');
+  var filtersSummary = document.getElementById('filtersSummary');
+
+  // ===== config =====
+  var MATCH_MODE = 'OR'; // 'OR' (any tag matches) or 'AND' (must include all selected)
+
+  // ===== helpers =====
+  function norm(s){ return (s||'').toLowerCase().trim(); }
+  function splitTags(s){
+    return norm(s).split(',').map(function(t){ return t.trim(); }).filter(Boolean);
+  }
+
+  // ===== collect unique tags from your tiles =====
+  var allTags = (function collectTags(){
+    var tags = new Set();
+    var blocks = Array.prototype.slice.call(grid.children);
+    for (var i=0;i<blocks.length;i++){
+      var a = blocks[i].querySelector('a[data-name]');
+      if (!a) continue;
+      splitTags(a.getAttribute('data-tags')||'').forEach(function(t){ tags.add(t); });
+    }
+    return Array.from(tags).sort();
+  })();
+
+  // ===== render tag checkboxes =====
+  var selectedTags = new Set();
+  function renderFilters(){
+    filtersHost.innerHTML = '';
+    if (allTags.length === 0){
+      var hint = document.createElement('div');
+      hint.textContent = 'Add data-tags="tag1, tag2" to tiles to enable filters.';
+      hint.style.fontSize = '12px';
+      hint.style.color = '#666';
+      filtersHost.appendChild(hint);
+      return;
+    }
+    allTags.forEach(function(tag){
+      var id = 'tag_' + tag.replace(/\s+/g,'_');
+      var label = document.createElement('label');
+      label.className = 'chip';
+      label.setAttribute('for', id);
+
+      var cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.id = id;
+      cb.value = tag;
+      cb.addEventListener('change', function(){
+        if (cb.checked) selectedTags.add(tag);
+        else selectedTags.delete(tag);
+        apply(); updateFiltersSummary();
+      });
+
+      var txt = document.createElement('span');
+      txt.textContent = tag;
+
+      label.appendChild(cb);
+      label.appendChild(txt);
+      filtersHost.appendChild(label);
+    });
+  }
+
+  function updateFiltersSummary(){
+    filtersSummary.textContent =
+      selectedTags.size ? Array.from(selectedTags).join(', ') : '(no filters)';
+  }
+
+  // ===== core filtering (search + tags) =====
+  function apply(){
+    var term = norm(q.value);
+    var blocks = Array.prototype.slice.call(grid.children);
+    var visible = 0;
+
+    for (var i=0;i<blocks.length;i++){
+      var block = blocks[i];
+      var a = block.querySelector('a[data-name]');
+      if (!a){ block.style.display='none'; continue; }
+
+      var hay = norm((a.getAttribute('data-name')||'') + ' ' + (a.getAttribute('data-tags')||''));
+      var itemTags = splitTags(a.getAttribute('data-tags')||'');
+
+      var matchesSearch = (!term || hay.indexOf(term) !== -1);
+      var matchesTags = true;
+
+      if (selectedTags.size > 0){
+        if (MATCH_MODE === 'AND') {
+          matchesTags = Array.from(selectedTags).every(function(t){ return itemTags.indexOf(t) !== -1; });
+        } else {
+          matchesTags = itemTags.some(function(t){ return selectedTags.has(t); });
+        }
+      }
+
+      var show = matchesSearch && matchesTags;
+      block.style.display = show ? 'block' : 'none';
+      if (show) visible++;
+    }
+
+    countEl.textContent = visible + ' app' + (visible===1?'':'s');
+  }
+
+  // ===== events =====
+  q.addEventListener('input', apply);
+
+  clearBtn.addEventListener('click', function(){
+    q.value = '';
+    selectedTags.clear();
+    var inputs = filtersHost.querySelectorAll('input[type="checkbox"]');
+    for (var i=0;i<inputs.length;i++) inputs[i].checked = false;
+    updateFiltersSummary();
+    apply();
+    q.focus();
+  });
+
+  if (filterBtn){
+    filterBtn.addEventListener('click', function(){
+      var open = filtersPanel.style.display !== 'none';
+      filtersPanel.style.display = open ? 'none' : 'block';
+    });
+  }
+  if (filtersClear){
+    filtersClear.addEventListener('click', function(){
+      selectedTags.clear();
+      var inputs = filtersHost.querySelectorAll('input[type="checkbox"]');
+      for (var i=0;i<inputs.length;i++) inputs[i].checked = false;
+      updateFiltersSummary();
+      apply();
+    });
+  }
+
+  // ===== init =====
+  renderFilters();
+  updateFiltersSummary();
+  apply();
+
+  // ===== vertical-only behavior inside iframe =====
+  var scroller = document.getElementById('scroller');
+  if (scroller) {
+    scroller.addEventListener('wheel', function(e){
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) e.preventDefault();
+    }, { passive: false });
+
+    scroller.addEventListener('keydown', function(e){
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') e.preventDefault();
+    });
+
+    // Prevent image drag/ghosting
+    var imgs = scroller.querySelectorAll('img');
+    for (var j=0;j<imgs.length;j++) imgs[j].setAttribute('draggable', 'false');
+  }
+})();
+</script>
+</body>
+</html>
